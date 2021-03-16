@@ -1,8 +1,9 @@
 import requests
 import json
-
+import time 
+## needs api key 
 url = "https://covid-193.p.rapidapi.com/statistics"
-##needs api key
+
 apiKey = ""
 
 headers = {
@@ -12,13 +13,13 @@ headers = {
 
 response = requests.request("GET", url, headers=headers)
 
-
+timestamp = str(time.time())
 content = response.content
 info = json.loads(content)
 print(type(info))
 print(info)
 
-virus =  open('CV2020.csv', 'w')
+virus =  open('cases'+timestamp+'.csv', 'w')
 
 responsej = info['response']
 virus.write('Country' + ',' + 'New Cases' + ','+ 'Active Cases'+ ','+ 'Critical Cases'+ ','+'Recovery'+ ','+'New Deaths'+ ','+'Total Deaths' +'\n')
